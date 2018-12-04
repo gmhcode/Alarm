@@ -60,6 +60,7 @@ class AlarmDetailTableViewController: UITableViewController {
         
         guard datePicker.calendar != nil,
             alarmNameLabel.text != nil,
+            
             let alarmName = alarmNameLabel.text else {return}
         
         if let existingAlarm = alarmLandingPad{
@@ -91,9 +92,13 @@ class AlarmDetailTableViewController: UITableViewController {
         
         if alarmLandingPad?.enabled == false {
           alarmButton.setTitle("Turn on", for: .normal)
+          alarmButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+          alarmButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
         else if alarmLandingPad?.enabled == true {
-            alarmButton.setTitle("turn off", for: .normal)
+            alarmButton.setTitle("Turn off", for: .normal)
+            alarmButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+            alarmButton.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
 
         }
 
