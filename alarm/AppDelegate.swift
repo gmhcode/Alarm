@@ -7,15 +7,36 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+        //makes an alert and sound when they recieve a notification outside of their phone
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+       
+        UNUserNotificationCenter.current().delegate = self
+        
+        let center =  UNUserNotificationCenter.current()
+        
+        
+        
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if let error = error {
+                print("There was an error in \(#function) \(error) : \(error.localizedDescription)")
+            }
+            if !granted {
+                print("this app is worthless unless you grant notifications")
+            }
+        }
         return true
     }
 
